@@ -108,16 +108,16 @@ function App() {
   // App UI when signed in
   return (
     <div className="min-h-screen flex flex-col items-center">
-      <div className="w-full  mx-auto px-4">
+      <div className="w-full max-w-[1440px] mx-auto px-4">
         <header className="flex items-center justify-between px-6 py-4 relative">
           <div className="flex items-center gap-4">
             <div className="flex flex-col items-center">
               <img
                 src="/priority-app-logo.png"
                 alt="Priority App"
-                className="h-11 w-auto"
+                className="h-14 w-auto"
               />
-              <span className=" sm:inline-block text-[10px]  font-semibold text-orange ">
+              <span className="hidden sm:inline-block text-[px]  font-semibold text-orange ">
                 PRIORITY PATH
               </span>
             </div>
