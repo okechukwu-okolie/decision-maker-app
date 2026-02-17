@@ -111,7 +111,7 @@ function App() {
       <div className="w-full  mx-auto px-4">
         <header className="flex items-center justify-between px-6 py-4 relative">
           <div className="flex items-center gap-4">
-            <div className="flex items-center">
+            <div className="flex flex-col items-center">
               <img
                 src="/priority-app-logo.png"
                 alt="Priority App"
