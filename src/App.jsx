@@ -108,7 +108,7 @@ function App() {
   // App UI when signed in
   return (
     <div className="min-h-screen flex flex-col items-center">
-      <div className="w-full max-w-[1440px] mx-auto px-4">
+      <div className="w-full  mx-auto px-4">
         <header className="flex items-center justify-between px-6 py-4 relative">
           <div className="flex items-center gap-4">
             <div className="flex items-center">
