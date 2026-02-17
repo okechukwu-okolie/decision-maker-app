@@ -122,15 +122,15 @@ Definition: Activities that require immediate attention.\n
 
   return (
     <div className="flex flex-col md:flex-row items-start md:items-center justify-center gap-8 p-6 md:p-12">
-      <div className="bg-[rgba(255,255,255,0.02)] border border-white/5 rounded-xl p-6 w-full md:w-3/5 shadow-lg">
+      <div className="bg-white/80 dark:bg-[rgba(255,255,255,0.02)] border border-gray-400 dark:border-white/5 rounded-xl p-6 w-full md:w-3/5 shadow-lg light-shadow text-gray-900 dark:text-white">
         <h2 className="text-2xl font-semibold text-orange-500 mb-4">
           Decision Maker
         </h2>
 
-        <label className="block mb-4 text-sm text-gray-300">
+        <label className="block mb-4 text-sm text-gray-700 dark:text-gray-300">
           What decision will you be making today?
           <input
-            className="block w-full mt-2 p-2 rounded-lg bg-white text-slate-900 border border-white/5"
+            className="block w-full mt-2 p-2 rounded-lg bg-white dark:bg-[#0b1a2a] text-slate-900 dark:text-slate-100 border border-gray-300 dark:border-white/6"
             type="text"
             value={text}
             onChange={(e) => setText(e.target.value)}
@@ -139,23 +139,25 @@ Definition: Activities that require immediate attention.\n
         </label>
 
         <div>
-          <p className="text-sm text-gray-400 mb-3">
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
             Adjust the 4 weights (move at least two sliders):
           </p>
           {labels.map((label, i) => (
             <div key={i} className="flex items-center gap-4 mb-4">
-              <div className="w-36 flex justify-between text-sm text-gray-300">
+              <div className="w-36 flex justify-between text-sm">
                 <button
                   type="button"
                   onClick={() => {
                     setModalTitle(label);
                     setModalOpen(true);
                   }}
-                  className="underline text-left"
+                  className="underline text-left text-gray-700 dark:text-gray-300"
                 >
                   {label}
                 </button>
-                <span className="text-gray-400">{ranges[i]}</span>
+                <span className="text-gray-700 dark:text-gray-400">
+                  {ranges[i]}
+                </span>
               </div>
               <input
                 className="flex-1"
@@ -171,7 +173,7 @@ Definition: Activities that require immediate attention.\n
 
         <div className="flex gap-3 mt-4">
           <button
-            className="flex-1 py-3 rounded-lg bg-orange-500 text-white font-semibold shadow-md disabled:opacity-50"
+            className="flex-1 py-3 rounded-lg bg-orange-500 text-white font-semibold shadow-md light-shadow disabled:opacity-50"
             onClick={handleAdd}
             disabled={!canAdd}
           >
@@ -179,21 +181,21 @@ Definition: Activities that require immediate attention.\n
           </button>
           {editingId && (
             <button
-              className="py-3 px-3 rounded-lg border border-white/6 text-white"
+              className="py-3 px-3 rounded-lg border border-gray-500 dark:border-white/6 text-gray-900 dark:text-white bg-gray-100 dark:bg-transparent light-shadow"
               onClick={cancelEdit}
             >
               Cancel
             </button>
           )}
           <button
-            className="py-3 px-3 rounded-lg border border-white/6 text-white disabled:opacity-50"
+            className="py-3 px-3 rounded-lg border border-black dark:border-white/6 text-black dark:text-white bg-gray-100 dark:bg-transparent disabled:opacity-50 light-shadow"
             onClick={handlePriority}
             disabled={items.length < 2}
           >
             Evaluate
           </button>
           <button
-            className="py-3 px-3 rounded-lg border border-white/6 text-white disabled:opacity-50"
+            className="py-3 px-3 rounded-lg border border-gray-500 dark:border-white/6 text-gray-900 dark:text-white bg-gray-100 dark:bg-transparent disabled:opacity-50 light-shadow"
             onClick={() => onEndGroup && onEndGroup()}
             disabled={items.length === 0}
           >
@@ -202,10 +204,12 @@ Definition: Activities that require immediate attention.\n
         </div>
       </div>
 
-      <div className="bg-[rgba(255,255,255,0.02)] border border-white/5 rounded-xl p-6 w-full md:w-2/5 shadow-lg">
-        <h3 className="text-xl font-semibold text-white mb-3">Decisions</h3>
+      <div className="bg-white/80 dark:bg-[rgba(255,255,255,0.02)] border border-gray-400 dark:border-white/5 rounded-xl p-6 w-full md:w-2/5 shadow-lg light-shadow text-gray-900 dark:text-white">
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+          Decisions
+        </h3>
         {items.length === 0 ? (
-          <p className="text-gray-400">
+          <p className="text-gray-700 dark:text-gray-400">
             No decisions yet — add one to get started.
           </p>
         ) : (
@@ -213,24 +217,36 @@ Definition: Activities that require immediate attention.\n
             {items.map((it, idx) => (
               <li
                 key={it.id}
-                className={`flex justify-between items-center p-3 rounded-lg mb-3 ${classify(it) === 0 ? "bg-orange-100/20 border-orange-200/20" : classify(it) === 1 ? "bg-yellow-100/20 border-yellow-200/20" : classify(it) === 2 ? "bg-green-100/20 border-green-200/20" : "bg-white/3 border-white/5"}`}
+                className={`flex justify-between items-center p-3 rounded-lg mb-3 ${
+                  classify(it) === 0
+                    ? "bg-orange-100/20 border-orange-200/20"
+                    : classify(it) === 1
+                      ? "bg-yellow-100/20 border-yellow-200/20"
+                      : classify(it) === 2
+                        ? "bg-green-100/20 border-green-200/20"
+                        : "bg-white/3 border-gray-200 dark:border-white/5"
+                }`}
               >
                 <div>
-                  <strong className="block text-white">{it.text}</strong>
-                  <div className="text-sm text-gray-400">
+                  <strong className="block text-gray-900 dark:text-white">
+                    {it.text}
+                  </strong>
+                  <div className="text-sm text-gray-700 dark:text-gray-400">
                     Urgency: {it.weights[0]} • Importance: {it.weights[1]}
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="text-sm text-gray-400 mr-2">#{idx + 1}</div>
+                  <div className="text-sm text-gray-700 dark:text-gray-400 mr-2">
+                    #{idx + 1}
+                  </div>
                   <button
-                    className="py-1 px-2 rounded bg-white/6 text-white text-sm"
+                    className="py-1 px-2 rounded bg-gray-100 dark:bg-white/6 text-gray-900 dark:text-white text-sm light-shadow"
                     onClick={() => handleEdit(it)}
                   >
                     Edit
                   </button>
                   <button
-                    className="py-1 px-2 rounded border border-white/6 text-red-300 text-sm"
+                    className="py-1 px-2 rounded border border-red-300/60 text-red-600 dark:border-white/6 dark:text-red-300 text-sm light-shadow"
                     onClick={() => handleDelete(it.id)}
                   >
                     Delete
@@ -243,14 +259,14 @@ Definition: Activities that require immediate attention.\n
       </div>
       {modalOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-[#071327] border border-white/6 rounded-lg p-6 max-w-lg w-full text-white">
+          <div className="bg-white dark:bg-[#071327] border border-gray-200 dark:border-white/6 rounded-lg p-6 max-w-lg w-full text-gray-900 dark:text-white">
             <h4 className="text-lg font-semibold mb-2">{modalTitle}</h4>
-            <p className="text-sm text-gray-300 mb-4">
+            <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
               {modalTexts[modalTitle]}
             </p>
             <div className="flex justify-end">
               <button
-                className="py-2 px-4 rounded-md bg-white/6"
+                className="py-2 px-4 rounded-md bg-gray-100 dark:bg-gray-500 text-gray-900 dark:text-white"
                 onClick={() => setModalOpen(false)}
               >
                 Cancel

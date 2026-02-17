@@ -10,7 +10,7 @@
   }
   :root {
     --bg: #ffffff;
-    --text: #0f1724;
+    --text: #000000;
     --muted: #6b7280;
     --card: rgba(0, 0, 0, 0.04);
   }
@@ -20,6 +20,15 @@
     --text: #e6eef8;
     --muted: #94a3b8;
     --card: rgba(255, 255, 255, 0.03);
+  }
+
+  /* light-mode shadow for buttons and containers */
+  --light-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  .light-shadow {
+    box-shadow: var(--light-shadow);
+  }
+  .dark .light-shadow {
+    box-shadow: none;
   }
 
   body {
