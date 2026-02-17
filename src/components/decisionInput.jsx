@@ -41,8 +41,10 @@ Definition: Activities that require immediate attention.\n
     setTouched(nextTouched);
   };
 
-  const allRangesTouched = touched.every(Boolean);
-  const canAdd = text.trim() !== "" && allRangesTouched;
+  const touchedCount = touched.filter(Boolean).length;
+  const rangesRequired = 2;
+  const rangesReady = touchedCount >= rangesRequired;
+  const canAdd = text.trim() !== "" && rangesReady;
 
   const handleAdd = () => {
     if (!canAdd) return;
@@ -138,7 +140,7 @@ Definition: Activities that require immediate attention.\n
 
         <div>
           <p className="text-sm text-gray-400 mb-3">
-            Adjust the 4 weights (move each slider at least once):
+            Adjust the 4 weights (move at least two sliders):
           </p>
           {labels.map((label, i) => (
             <div key={i} className="flex items-center gap-4 mb-4">
