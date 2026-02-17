@@ -122,7 +122,7 @@ Definition: Activities that require immediate attention.\n
 
   return (
     <div className="flex flex-col md:flex-row items-start md:items-center justify-center gap-8 p-[3px] md:p-12">
-      <div className="bg-white/80 dark:bg-[rgba(255,255,255,0.02)] border border-gray-400 dark:border-white/5 rounded-xl p-6 w-full md:w-3/5 shadow-lg light-shadow text-gray-900 dark:text-white">
+      <div className="bg-white/80 dark:bg-[rgba(255,255,255,0.02)] border border-gray-400 dark:border-white/5 rounded-xl p-3 w-full md:w-3/5 shadow-lg light-shadow text-gray-900 dark:text-white">
         <h2 className="text-2xl font-semibold text-orange-500 mb-4">
           Decision Maker
         </h2>
