@@ -117,7 +117,7 @@ function App() {
                 alt="Priority App"
                 className="h-11 w-auto"
               />
-              <span className=" sm:inline-block text-sm font-semibold text-orange ">
+              <span className=" sm:inline-block text-[10px]  font-semibold text-orange ">
                 PRIORITY PATH
               </span>
             </div>
