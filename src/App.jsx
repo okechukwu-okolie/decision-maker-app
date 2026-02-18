@@ -219,7 +219,7 @@ function App() {
           </div>
 
           {mobileMenuOpen && (
-            <div className="absolute right-4 top-16 border border-white/6 rounded-lg p-3 w-44 z-40 md:hidden bg-white text-black dark:bg-none dark:text-slate-500">
+            <div className="absolute right-4 top-16 border border-white/6 rounded-lg p-3 w-44 z-40 md:hidden bg-white text-black dark:bg-slate-600/60 dark:text-slate-500">
              
               <button
                 className="block w-full text-left px-3 py-2 rounded hover:bg-white/3"
