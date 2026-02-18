@@ -32,7 +32,7 @@ const SIgnIn = ({ onSignIn, goToSignUp }) => {
         setSubmitError("Invalid email or password");
       }
     } catch (e) {
-      setSubmitError("Error reading users");
+      console.log(setSubmitError(e.message))
     }
   };
 

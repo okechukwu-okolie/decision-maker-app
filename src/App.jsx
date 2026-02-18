@@ -20,7 +20,7 @@ function App() {
         ? "dark"
         : "light";
     } catch (e) {
-      alert(e.message);
+      console.log(e.message);
     }
   });
   const [currentUser, setCurrentUser] = useState(() => {

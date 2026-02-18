@@ -1,33 +1,18 @@
 import React, { useState } from "react";
+import Modal from "./Modal";
+import { labels } from "./modalData";
+import { modalTexts } from "./modalData";
+import Button from "./Button";
+import { styling } from "./modalData";
 
 const DecisionInput = ({ items = [], setItems, onEndGroup }) => {
   const [text, setText] = useState("");
   const [ranges, setRanges] = useState([0, 0, 0, 0]);
   const [touched, setTouched] = useState([false, false, false, false]);
   const [editingId, setEditingId] = useState(null);
+  
 
-  const labels = ["Important", "Urgent", "Unimportant", "Unurgent"];
-  const modalTexts = {
-    Important: `Definition: Activities that contribute to your high-level mission, 
-      your values, and your high-priority goals.\n Importance is defined by your 
-      Compass: it is what moves the needle in your life or career over the long term \n 
-      Simple Example; Spending an hour planning your business strategy for the next year. 
-      It doesn't have to be done today, but it is vital for your future success.`,
-    Urgent: `
-Definition: Activities that require immediate attention.\n
- These are visible, "in your face," and usually associated with the Clock. 
- They press on us and insist on action, often because of someone else’s timeline or a looming deadline.\n
- Simple Example: A phone call ringing right now or an email marked "ASAP" from a colleague.
-`,
-    Unimportant: `Definition: Activities that do not contribute to your own mission or long-term goals.\n
-     We often mistake these for being important simply because they are urgent or because they are "popular" (things everyone else is doing).\n
-
-    Simple Example: Attending a meeting you were invited to where you have no contribution to make and nothing to learn, but you go just because it’s on the calendar.`,
-    Unurgent: `Definition: Activities that have no immediate deadline or "press" for your time. \n
-      These can be the most dangerous because they are easy to procrastinate (if they are important) or easy to get lost in (if they are unimportant).
-
-\nSimple Example: Sorting through your junk mail folder or mindlessly scrolling through a social media feed.`,
-  };
+  
 
   const [modalOpen, setModalOpen] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
@@ -46,7 +31,8 @@ Definition: Activities that require immediate attention.\n
   const rangesReady = touchedCount >= rangesRequired;
   const canAdd = text.trim() !== "" && rangesReady;
 
-  const handleAdd = () => {
+
+const handleAdd = () => {
     if (!canAdd) return;
     const newObj = {
       id: Date.now(),
@@ -70,6 +56,7 @@ Definition: Activities that require immediate attention.\n
     setTouched([false, false, false, false]);
   };
 
+  
   const handleEdit = (item) => {
     setEditingId(item.id);
     setText(item.text);
@@ -172,35 +159,47 @@ Definition: Activities that require immediate attention.\n
         </div>
 
         <div className="flex gap-3 mt-4">
-          <button
+          {/* <button
             className="flex-1 py-3 rounded-lg bg-orange-500 text-white font-semibold shadow-md light-shadow disabled:opacity-50"
             onClick={handleAdd}
             disabled={!canAdd}
           >
             {editingId ? "Save" : "Add Decision"}
-          </button>
+            
+          </button> */}
+
+          <Button 
+            styling={styling.decision}
+            onClick = {handleAdd}
+            disabled = {!canAdd}
+            title = {editingId ? "Save" : "Add Decision"}
+            />
+
           {editingId && (
-            <button
-              className="py-3 px-3 rounded-lg border border-gray-500 dark:border-white/6 text-gray-900 dark:text-white bg-gray-100 dark:bg-transparent light-shadow"
-              onClick={cancelEdit}
-            >
-              Cancel
-            </button>
+
+              <Button 
+               styling={styling.cancel}
+            onClick = {cancelEdit}
+            disabled = {items.length < 2}
+            title = 'cancel'
+            />
           )}
-          <button
-            className="py-3 px-3 rounded-lg border border-black dark:border-white/6 text-black dark:text-white bg-gray-100 dark:bg-transparent disabled:opacity-50 light-shadow"
-            onClick={handlePriority}
-            disabled={items.length < 2}
-          >
-            Evaluate
-          </button>
-          <button
-            className="py-3 px-3 rounded-lg border border-gray-500 dark:border-white/6 text-gray-900 dark:text-white bg-gray-100 dark:bg-transparent disabled:opacity-50 light-shadow"
-            onClick={() => onEndGroup && onEndGroup()}
-            disabled={items.length === 0}
-          >
-            End Group
-          </button>
+
+           <Button 
+            styling={styling.evaluate}
+            onClick = {handlePriority}
+            disabled = {items.length < 2}
+            title = 'Evaluate'
+            />
+
+             <Button 
+            styling={styling.endGroup}
+            onClick = {() => onEndGroup && onEndGroup()}
+            disabled = {items.length === 0}
+            title = 'End Group'
+            />
+          
+         
         </div>
       </div>
 
@@ -239,18 +238,19 @@ Definition: Activities that require immediate attention.\n
                   <div className="text-sm text-gray-700 dark:text-gray-400 mr-2">
                     #{idx + 1}
                   </div>
-                  <button
-                    className="py-1 px-2 rounded bg-gray-100 dark:bg-white/6 text-gray-900 dark:text-white text-sm light-shadow"
-                    onClick={() => handleEdit(it)}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    className="py-1 px-2 rounded border border-red-300/60 text-red-600 dark:border-white/6 dark:text-red-300 text-sm light-shadow"
-                    onClick={() => handleDelete(it.id)}
-                  >
-                    Delete
-                  </button>
+
+                  <Button 
+                      styling={styling.edit}
+                      onClick = {() => handleEdit(it)}
+                      title = 'Edit'
+                      />
+
+               <Button 
+                    styling={styling.delete}
+                    onClick = {() => handleDelete(it.id)}
+                    title = 'Delete'
+                    />
+                  
                 </div>
               </li>
             ))}
@@ -258,22 +258,7 @@ Definition: Activities that require immediate attention.\n
         )}
       </div>
       {modalOpen && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white dark:bg-[#071327] border border-gray-200 dark:border-white/6 rounded-lg p-6 max-w-lg w-full text-gray-900 dark:text-white">
-            <h4 className="text-lg font-semibold mb-2">{modalTitle}</h4>
-            <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
-              {modalTexts[modalTitle]}
-            </p>
-            <div className="flex justify-end">
-              <button
-                className="py-2 px-4 rounded-md bg-gray-100 dark:bg-gray-500 text-gray-900 dark:text-white"
-                onClick={() => setModalOpen(false)}
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
+       <Modal modalTitle = {modalTitle} modalTexts = {modalTexts} setModalOpen ={setModalOpen}/>
       )}
     </div>
   );
