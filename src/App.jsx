@@ -123,7 +123,7 @@ function App() {
             </div>
             <nav className="hidden md:flex gap-2">
               <button
-                className="px-3 py-2 rounded-lg bg-white/3 text-white"
+                className="px-3 py-2 rounded-lg bg-white/3 text-white dark:text:black"
                 onClick={() => {
                   setRoute("app");
                   setMobileMenuOpen(false);
