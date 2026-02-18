@@ -13,7 +13,7 @@ const UserInput = ({ currentUser }) => {
       const raw = localStorage.getItem(STORAGE_KEY);
       return raw ? JSON.parse(raw) : [];
     } catch (e) {
-      alert(e.message)
+     return e.message
     }
   });
 

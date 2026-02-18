@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Modal from "./Modal";
-import { labels } from "./modalData";
-import { modalTexts } from "./modalData";
+import { modalTexts, labels } from "./modalData";
 import Button from "./Button";
 import { styling } from "./modalData";
 
@@ -159,14 +158,7 @@ const handleAdd = () => {
         </div>
 
         <div className="flex gap-3 mt-4">
-          {/* <button
-            className="flex-1 py-3 rounded-lg bg-orange-500 text-white font-semibold shadow-md light-shadow disabled:opacity-50"
-            onClick={handleAdd}
-            disabled={!canAdd}
-          >
-            {editingId ? "Save" : "Add Decision"}
-            
-          </button> */}
+       
 
           <Button 
             styling={styling.decision}
@@ -180,7 +172,6 @@ const handleAdd = () => {
               <Button 
                styling={styling.cancel}
             onClick = {cancelEdit}
-            disabled = {items.length < 2}
             title = 'cancel'
             />
           )}
